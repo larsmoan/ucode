@@ -7,8 +7,6 @@ import threading
 
 import pytest
 
-import pytest
-
 from ucode.agents import copilot
 
 WS = "https://example.databricks.com"
