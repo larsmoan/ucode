@@ -1782,7 +1782,10 @@ def _auto_configure_tool(
     configure_kwargs = {"custom_oauth": custom_oauth} if custom_oauth is not None else {}
     state = configure_shared_state(workspace, profile=profile, tools=[tool], **configure_kwargs)
 
-    state = configure_single_tool(tool, state, explicit_model=model)
+    if model is None:
+        state = configure_single_tool(tool, state)
+    else:
+        state = configure_single_tool(tool, state, explicit_model=model)
 
     spec = TOOL_SPECS[tool]
     console.print(
@@ -1795,6 +1798,7 @@ def _auto_configure_tool(
             expand=False,
         )
     )
+
 
 CAN_USE_CACHED_CONFIG_AGENTS = frozenset({"claude", "codex"})
 
